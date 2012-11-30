@@ -32,9 +32,9 @@ $(function() {
   /* Modals
   ============================================== */
 
-  $('#launch_modal').click(function(ev) {
+  $('button[data-modal-target]').click(function(ev) {
     ev.preventDefault();
-    var modal = $('.overlay').clone();
+    var modal = $('#' + ev.target.dataset.modalTarget).clone();
     $(modal).removeAttr('style');
     $(modal).find('button').click(function() {
       $(modal).addClass('transparent');
