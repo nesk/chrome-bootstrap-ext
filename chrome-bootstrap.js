@@ -32,7 +32,7 @@ $(function() {
     /* Modals
     ============================================== */
 
-    $('button[data-modal-target]').click(function(ev) {
+    $('button[data-modal]').click(function(ev) {
         ev.preventDefault();
         var modal = $('#' + ev.target.dataset.modalTarget).clone();
         $(modal).removeAttr('style');
