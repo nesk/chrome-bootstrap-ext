@@ -1,0 +1,10 @@
+{
+    "name": "chrome-bootstrap-ext",
+    "version": "0.1.0",
+    "description": "Extended version of Chrome UI bootstrap, provides JavaScript additions to manage modals, i18n and storage",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/Nesk/chrome-bootstrap-ext.git"
+    },
+    "private": true
+}
