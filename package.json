@@ -6,5 +6,9 @@
         "type": "git",
         "url": "git://github.com/Nesk/chrome-bootstrap-ext.git"
     },
+    "devDependencies": {
+        "grunt": "0.3.x",
+        "grunt-contrib-less": "0.3.x"
+    },
     "private": true
 }
