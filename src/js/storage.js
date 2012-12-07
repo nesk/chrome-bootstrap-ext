@@ -79,11 +79,11 @@ var Storage = window.chromeBootstrap.Storage = (function() {
      */
 
     fn.store = function(id, value) {
-
+        localStorage[id] = JSON.stringify(value);
     };
 
     fn.load = function(id), {
-
+        return JSON.parse(localStorage[id]);
     };
 
     /*
