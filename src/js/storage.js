@@ -2,7 +2,7 @@
  * Storage class : declaration AND instanciation
  */
 
-var Storage = (function() {
+var Storage = window.chromeBootstrap.Storage = (function() {
 
     var Storage = function() {
         this.patterns = {};
