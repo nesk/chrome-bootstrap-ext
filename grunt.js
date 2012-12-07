@@ -12,7 +12,15 @@ module.exports = function(grunt) {
 
         concat: {
             dist: {
-                src: ['src/js/intro.js', 'src/js/navigation.js', 'src/js/modal.js', 'src/js/i18n.js', 'src/js/outro.js'],
+                src: [
+                    'src/js/intro.js',
+                    'src/js/navigation.js',
+                    'src/js/modal.js',
+                    'src/js/i18n.js',
+                    'src/js/storage.js',
+                    'src/js/storage-patterns.js',
+                    'src/js/outro.js'
+                ],
                 dest: 'dist/chrome-bootstrap.js'
             }
         }
