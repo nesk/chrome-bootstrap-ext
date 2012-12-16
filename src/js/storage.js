@@ -6,11 +6,29 @@ var Storage = window.chromeBootstrap.Storage = (function() {
 
     var Storage = function() {
         this.patterns = {};
+        
+        // Default parameters
+        this.params = {
+            'sync': true
+        };
     };
 
     var fn = Storage.prototype;
 
     /*
+    /*
+     * Parameters
+     */
+
+    fn.setParam = function(id, value) {
+        this.params[id] = value;
+        return this; // Chaining
+    };
+
+    fn.getParam = function(id) {
+        return this.params[id];
+    };
+
      * Patterns
      */
 
