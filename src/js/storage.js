@@ -42,13 +42,16 @@ var Storage = window.chromeBootstrap.Storage = (function() {
         // Store and load actions are wrapped inside functions to easily retrieve and provide data
 
         pattern.storeEvent = function(event) {
-            var value = storeAction(event); // The Event object is provided to the storage function but isn't required
-            _this.store();
+            var name = event.currentTarget.name,
+                value = storeAction(event); // The Event object is provided to the storage function but isn't required
+
+            _this.store(name, value);
         };
 
-        pattern.loadEvent = function() {
-            var value = _this.load(id); // The pattern id is required
-            loadAction(value);
+        pattern.loadEvent = function(event) {
+            var name = event.currentTarget.name;
+
+            _this.load(name, loadAction); // loadAction is given as a callback
         };
 
         return this; // Chaining
@@ -96,11 +99,15 @@ var Storage = window.chromeBootstrap.Storage = (function() {
      */
 
     fn.store = function(id, value) {
-        localStorage[id] = JSON.stringify(value);
+        this.storageArea.set({
+            id: value
+        });
     };
 
-    fn.load = function(id), {
-        return JSON.parse(localStorage[id]);
+    fn.load = function(id, callback) {
+        this.storageArea.get(id, function(items) {
+            callback(items[id]);
+        });
     };
 
     /*
