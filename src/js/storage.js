@@ -6,7 +6,6 @@ var Storage = window.chromeBootstrap.Storage = (function() {
 
     var Storage = function() {
         this.patterns = {};
-        this.bindNodes = [];
     };
 
     var fn = Storage.prototype;
@@ -34,7 +33,7 @@ var Storage = window.chromeBootstrap.Storage = (function() {
             loadAction(value);
         };
 
-        return this; // Allows chaining
+        return this; // Chaining
     };
 
     // Returns the pattern that suits the given node, or null.
