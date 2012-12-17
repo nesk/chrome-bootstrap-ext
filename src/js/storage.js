@@ -62,7 +62,7 @@ var Storage = window.chromeBootstrap.Storage = (function() {
         var patterns = this.patterns;
 
         for(var i in patterns) {
-            if(node.is(patterns[i].scheme)) {
+            if(node.webkitMatchesSelector(patterns[i].scheme)) {
                 return patterns[i];
             }
         }
