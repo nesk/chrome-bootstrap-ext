@@ -61,16 +61,17 @@ var Storage = window.chromeBootstrap.Storage = (function() {
         // Store and load actions are wrapped inside functions to easily retrieve and provide data
 
         pattern.storeEvent = function(event) {
-            var name = event.currentTarget.name,
-                value = storeAction(event); // The Event object is provided to the storage function but isn't required
+            var target = event.currentTarget,
+                value = storeAction.call(target, event); // The Event object is provided to the storage function but isn't required
 
-            _this.store(name, value);
+            _this.store(target.name, value);
         };
 
-        pattern.loadEvent = function(event) {
-            var name = event.currentTarget.name;
-
-            _this.load(name, loadAction); // loadAction is given as a callback
+        // Loads the data from the storage API and applies it to the node
+        pattern.loadEvent = function(node) {
+            _this.load(node.name, function(value) {
+                loadAction.call(node, value); // loadAction is given as a callback through a wrapper which applies the correct "this" object
+            });
         };
 
         return this; // Chaining
@@ -97,20 +98,21 @@ var Storage = window.chromeBootstrap.Storage = (function() {
      * Events
      */
 
-    fn.setBinding = function(node, type) {
+    fn.setBinding = function(node, method) {
         var pattern = this.getPattern(node); // An event can't be added without a valid pattern
-        
-        pattern && node[type](pattern.event, pattern.storeEvent);
 
-        return !!pattern;
+        pattern && node[method](pattern.event, pattern.storeEvent);
+
+        return pattern;
     }
 
     fn.bind = function(node) {
-        return this.setBinding(node, 'on');
+        var pattern = this.setBinding(node, 'addEventListener');
+        pattern && pattern.loadEvent(node);
     };
 
     fn.unbind = function(node) {
-        return this.setBinding(node, 'off');
+        this.setBinding(node, 'removeEventListener');
     };
 
     /*
@@ -118,9 +120,9 @@ var Storage = window.chromeBootstrap.Storage = (function() {
      */
 
     fn.store = function(id, value) {
-        this.storageArea.set({
-            id: value
-        });
+        var items = {};
+        items[id] = value;
+        this.storageArea.set(items);
     };
 
     fn.load = function(id, callback) {
