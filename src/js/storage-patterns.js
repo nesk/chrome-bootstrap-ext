@@ -4,7 +4,7 @@
 
 Storage
 
-    .setPattern('text', 'input[type=text]', 'keyup',
+    .setPattern('text', 'input[name][type=text]', 'keyup',
         function() {
             return this.value;
         },
@@ -13,7 +13,7 @@ Storage
         }
     )
     
-    .setPattern('textarea', 'textarea', 'keyup',
+    .setPattern('textarea', 'textarea[name]', 'keyup',
         function() {
             return this.value;
         },
@@ -22,7 +22,7 @@ Storage
         }
     )
     
-    .setPattern('radio', 'input[type=radio]', 'change',
+    .setPattern('radio', 'input[name][type=radio]', 'change',
         function() {
             return this.checked;
         },
@@ -31,7 +31,7 @@ Storage
         }
     )
     
-    .setPattern('checkbox', 'input[type=checkbox]', 'change',
+    .setPattern('checkbox', 'input[name][type=checkbox]', 'change',
         function() {
             return this.checked;
         },
@@ -40,7 +40,7 @@ Storage
         }
     )
     
-    .setPattern('select', 'select', 'change',
+    .setPattern('select', 'select[name]', 'change',
         function() {
             return this.selectedIndex;
         },
