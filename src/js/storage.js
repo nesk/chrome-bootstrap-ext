@@ -16,6 +16,24 @@ var Storage = window.chromeBootstrap.Storage = (function() {
     var fn = Storage.prototype;
 
     /*
+     * Init
+     */
+
+    fn.init = function(rootNode) {
+        // The "sync" param impacts on the storage area
+        this.storageArea = this.params.sync
+            ? chrome.storage.sync
+            : chrome.storage.local;
+
+        var _this = this,
+            nodes = $$('[data-storage]', rootNode);
+        
+        // Binds to each input with a "data-storage" attribute
+        nodes.forEach(function(node) {
+            _this.bind(node);
+        });
+    };
+
     /*
      * Parameters
      */
@@ -29,6 +47,7 @@ var Storage = window.chromeBootstrap.Storage = (function() {
         return this.params[id];
     };
 
+    /*
      * Patterns
      */
 
